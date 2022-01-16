@@ -19,6 +19,7 @@
     <title>Homepage</title>
   </head>
   <body>
+    {% load type_cast %}
     <div class="container">
       <div class="p-4 m-4">
         <div class="col-lg-5 mx-auto border rounded">
@@ -31,6 +32,14 @@
             <h3>{{ error }}</h3>
           </div>
           {% endif %}
+
+
+
+
+          <h1>{{ request.method }}</h1>
+          <h1>{{ request.session | value_to_dict:"Hi, I am in type cast" }}</h1>
+          <h1>{{request.session.hi}}</h1>
+          <h1>{{request.session.dct.n2}}</h1>
 
           <form action="/" method="post">
             {% csrf_token %}

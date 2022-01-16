@@ -6,6 +6,10 @@ from mstore.models import User
 
 def login(request):
     if request.method == "GET":
+        print(dict(request.session))
+        request.session["hi"] = "Hello"
+        request.session["dct"] = {"n1": 500, "n2": 700, "n3": 900}
+        print(dict(request.session))
         return render(request, "mstore/login.html")
     else:
         data = request.POST
