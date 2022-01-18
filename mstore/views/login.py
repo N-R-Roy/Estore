@@ -6,11 +6,10 @@ from mstore.models import User
 
 def login(request):
     if request.method == "GET":
-        print(dict(request.session))
-        request.session["hi"] = "Hello"
-        request.session["dct"] = {"n1": 500, "n2": 700, "n3": 900}
-        print(dict(request.session))
-        return render(request, "mstore/login.html")
+        if request.session.get("user_email"):
+            return redirect("mstore:index")
+        else:
+            return render(request, "mstore/login.html")
     else:
         data = request.POST
 
@@ -26,6 +25,7 @@ def login(request):
         err_msg = ""
         if user:
             if check_password(password, user.password):
+                request.session['user_email'] = email
                 return redirect("mstore:index")
             else:
                 err_msg = "Invalid email or password"
@@ -33,5 +33,7 @@ def login(request):
             err_msg = "Invalid email or password"
 
         return render(request, "mstore/login.html", {'error': err_msg})
+
+
 
 

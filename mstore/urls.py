@@ -1,6 +1,7 @@
 from django.urls import path
 from .views.index import index
 from .views.login import login
+from .views.logout import logout
 from .views.signup import signup
 
 
@@ -10,5 +11,6 @@ urlpatterns = [
     path('', login, name="login"),
     path('signup/', signup, name="signup"),
     path('index/', index, name="index"),
+    path('logout/', logout, name="logout"),
 ]
 
